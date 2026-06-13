@@ -1,5 +1,9 @@
 #!/usr/bin/python3
+"""This module provides a text indentation function."""
+
+
 def text_indentation(text):
+    """Print text with two new lines after ., ? and : characters."""
     if not isinstance(text, str):
         raise TypeError("text must be a string")
 

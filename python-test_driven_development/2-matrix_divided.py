@@ -1,5 +1,9 @@
 #!/usr/bin/python3
+"""This module provides a matrix division function."""
+
+
 def matrix_divided(matrix, div):
+    """Return a new matrix with every element divided by div."""
     msg = "matrix must be a matrix (list of lists) of integers/floats"
 
     if not isinstance(matrix, list) or matrix == []:
