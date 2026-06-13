@@ -1,0 +1,27 @@
+The ``5-text_indentation`` module
+=================================
+
+Import function:
+
+>>> text_indentation = __import__('5-text_indentation').text_indentation
+
+Basic text:
+
+>>> text_indentation("Hello. World? Yes: Done")
+Hello.
+<BLANKLINE>
+World?
+<BLANKLINE>
+Yes:
+<BLANKLINE>
+Done
+>>> text_indentation("No punctuation")
+No punctuation
+>>> text_indentation("")
+
+Invalid text:
+
+>>> text_indentation(12)
+Traceback (most recent call last):
+...
+TypeError: text must be a string
