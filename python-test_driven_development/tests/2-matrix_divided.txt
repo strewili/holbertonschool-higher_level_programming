@@ -13,6 +13,8 @@ Basic divisions:
 [[0.75, 1.25], [1.75, 2.25]]
 >>> matrix_divided([[1, 2, 3]], 3)
 [[0.33, 0.67, 1.0]]
+>>> matrix_divided([[1, 2], [3, 4]], float("inf"))
+[[0.0, 0.0], [0.0, 0.0]]
 
 The original matrix is not modified:
 
@@ -24,6 +26,14 @@ The original matrix is not modified:
 
 Invalid matrix values:
 
+>>> matrix_divided()
+Traceback (most recent call last):
+...
+TypeError: matrix_divided() missing 2 required positional arguments: 'matrix' and 'div'
+>>> matrix_divided([[1, 2]])
+Traceback (most recent call last):
+...
+TypeError: matrix_divided() missing 1 required positional argument: 'div'
 >>> matrix_divided("not a matrix", 2)
 Traceback (most recent call last):
 ...
