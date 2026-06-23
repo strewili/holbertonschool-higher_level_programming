@@ -8,20 +8,50 @@ First, import the class:
 Create an instance:
     >>> bg = BaseGeometry()
 
-Using integer_validator with valid values:
-    >>> bg.integer_validator("my_int", 10)
-    >>> bg.integer_validator("width", 89)
+Test present: integer_validator("age", 1)
+    >>> bg.integer_validator("age", 1)
 
-Using integer_validator with a non-integer value (should raise TypeError):
-    >>> bg.integer_validator("width", "89")
+Test present: integer_validator("age") -> missing 1 argument
+    >>> bg.integer_validator("age")
     Traceback (most recent call last):
-    TypeError: width must be an integer
+    TypeError: integer_validator() missing 1 required positional argument: 'value'
 
-Using integer_validator with a 0 or negative value (should raise ValueError):
-    >>> bg.integer_validator("height", 0)
+Test present: integer_validator("age", 0)
+    >>> bg.integer_validator("age", 0)
     Traceback (most recent call last):
-    ValueError: height must be greater than 0
+    ValueError: age must be greater than 0
 
-    >>> bg.integer_validator("distance", -5)
+Test present: integer_validator("age", -4)
+    >>> bg.integer_validator("age", -4)
     Traceback (most recent call last):
-    ValueError: distance must be greater than 0
+    ValueError: age must be greater than 0
+
+Test present: integer_validator("age", "4")
+    >>> bg.integer_validator("age", "4")
+    Traceback (most recent call last):
+    TypeError: age must be an integer
+
+Test present: integer_validator("age", (4,))
+    >>> bg.integer_validator("age", (4,))
+    Traceback (most recent call last):
+    TypeError: age must be an integer
+
+Test present: integer_validator("age", [3])
+    >>> bg.integer_validator("age", [3])
+    Traceback (most recent call last):
+    TypeError: age must be an integer
+
+Test present: integer_validator("age", True)
+    >>> bg.integer_validator("age", True)
+    Traceback (most recent call last):
+    TypeError: age must be an integer
+
+Test present: integer_validator("age", {3, 4})
+    >>> bg.integer_validator("age", {3, 4})
+    Traceback (most recent call last):
+    TypeError: age must be an integer
+
+Test present: integer_validator("age", None)
+    >>> bg.integer_validator("age", None)
+    Traceback (most recent call last):
+    TypeError: age must be an integer
