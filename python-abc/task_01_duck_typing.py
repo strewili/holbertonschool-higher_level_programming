@@ -55,3 +55,14 @@ def shape_info(shape):
     """Print the area and perimeter of a shape."""
     print(f"Area: {shape.area()}")
     print(f"Perimeter: {shape.perimeter()}")
+
+
+if __name__ == "__main__":
+    circle = Circle(5)
+    rectangle = Rectangle(4, 7)
+
+    print("--- Circle Info ---")
+    shape_info(circle)
+
+    print("\n--- Rectangle Info ---")
+    shape_info(rectangle)
