@@ -53,17 +53,5 @@ class Rectangle(Shape):
 
 def shape_info(shape):
     """Print area and perimeter relying on Duck Typing."""
-    print(f"Area: {shape.area()}")
-    print(f"Perimeter: {shape.perimeter()}")
-
-
-# كود الفحص والاختبار (Test)
-if __name__ == "__main__":
-    circle = Circle(5)
-    rectangle = Rectangle(4, 7)
-
-    print("--- Circle Info ---")
-    shape_info(circle)
-
-    print("\n--- Rectangle Info ---")
-    shape_info(rectangle)
+    print("Area: {}".format(shape.area()))
+    print("Perimeter: {}".format(shape.perimeter()))
