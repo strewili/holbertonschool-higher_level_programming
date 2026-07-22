@@ -1,16 +1,16 @@
 #!/usr/bin/python3
-"""Module containing City class"""
+"""Module that defines the City class, linked to the MySQL cities table."""
+from model_state import Base
 from sqlalchemy import Column, Integer, String, ForeignKey
-from sqlalchemy.ext.declarative import declarative_base
-
-Base = declarative_base()
+from sqlalchemy.orm import relationship
 
 
 class City(Base):
-    """The City class"""
-    __tablename__ = 'cities'
+    """Represent a city, mapped to the MySQL cities table."""
 
-    id = Column(Integer, primary_key=True, nullable=False,
-                autoincrement=True, unique=True)
+    __tablename__ = "cities"
+
+    id = Column(Integer, primary_key=True, autoincrement=True, nullable=False)
     name = Column(String(128), nullable=False)
-    state_id = Column(Integer, ForeignKey('states.id'), nullable=False)
+    state_id = Column(Integer, ForeignKey("states.id"), nullable=False)
+    state = relationship("State", backref="cities")

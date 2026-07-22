@@ -1,31 +1,32 @@
 #!/usr/bin/python3
-"""Lists all values in states table matching the argument
-"""
-
+"""Module that safely lists all states matching a given name argument."""
 import sys
 import MySQLdb
 
 
 if __name__ == "__main__":
-    db = MySQLdb.connect(
-        host="localhost",
-        user=sys.argv[1],
-        passwd=sys.argv[2],
-        db=sys.argv[3],
-        port=3306
-    )
-
-    cur = db.cursor()
-
+    """Connect to MySQL and print states matching the given name safely."""
+    username = sys.argv[1]
+    password = sys.argv[2]
+    db_name = sys.argv[3]
     state_name = sys.argv[4]
 
-    query = "SELECT * FROM states WHERE BINARY name = %s ORDER BY id ASC"
-    cur.execute(query, (state_name,))
+    db = MySQLdb.connect(
+        host="localhost",
+        port=3306,
+        user=username,
+        passwd=password,
+        db=db_name
+    )
 
-    rows = cur.fetchall()
-
+    cursor = db.cursor()
+    cursor.execute(
+        "SELECT * FROM states WHERE name = %s ORDER BY id ASC",
+        (state_name,)
+    )
+    rows = cursor.fetchall()
     for row in rows:
         print(row)
 
-    cur.close()
+    cursor.close()
     db.close()

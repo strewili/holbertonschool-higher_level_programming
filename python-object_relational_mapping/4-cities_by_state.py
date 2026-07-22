@@ -1,34 +1,33 @@
 #!/usr/bin/python3
-"""
-a script that lists all cities from the database
-"""
+"""Module that lists all cities along with their state from the database."""
 import sys
 import MySQLdb
 
+
 if __name__ == "__main__":
-    user_name = sys.argv[1]
+    """Connect to MySQL and print all cities joined with their state."""
+    username = sys.argv[1]
     password = sys.argv[2]
     db_name = sys.argv[3]
 
     db = MySQLdb.connect(
-        user=user_name,
-        passwd=password,
-        db=db_name,
         host="localhost",
-        port=3306
+        port=3306,
+        user=username,
+        passwd=password,
+        db=db_name
     )
 
-    curs = db.cursor()
-    curs.execute(
+    cursor = db.cursor()
+    cursor.execute(
         "SELECT cities.id, cities.name, states.name "
         "FROM cities "
-        "JOIN states ON cities.state_id = states.id "
+        "INNER JOIN states ON cities.state_id = states.id "
         "ORDER BY cities.id ASC"
-        )
-
-    rows = curs.fetchall()
+    )
+    rows = cursor.fetchall()
     for row in rows:
         print(row)
 
-    curs.close()
+    cursor.close()
     db.close()

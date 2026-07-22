@@ -1,27 +1,29 @@
 #!/usr/bin/python3
-"""
-Module for adding Louisiana.I AM TIRED OF I HATE THAT!!!
-"""
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from sys import argv
+"""Script that adds the State object 'Louisiana' to the database."""
+import sys
 from model_state import Base, State
 
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+
 if __name__ == "__main__":
-
-    engine = create_engine("mysql+mysqldb://{}:{}@localhost:3306/{}"
-                           .format(argv[1], argv[2], argv[3]))
-
+    """Connect to MySQL, insert a new Louisiana state, print its new id."""
+    engine = create_engine(
+        'mysql+mysqldb://{}:{}@localhost/{}'.format(
+            sys.argv[1], sys.argv[2], sys.argv[3]
+        ),
+        pool_pre_ping=True
+    )
     Base.metadata.create_all(engine)
 
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    s = State(name='Louisiana')
-    session.add(s)
+    new_state = State(name="Louisiana")
+    session.add(new_state)
     session.commit()
 
-    print(s.id)
+    print(new_state.id)
 
-    if session:
-        session.close()
+    session.close()
